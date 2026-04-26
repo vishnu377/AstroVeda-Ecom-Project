@@ -137,6 +137,95 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
+<!-- Lead Generation Engine Section -->
+<section class="gem-finder-section" id="leadEngine">
+    <div class="gem-finder-card">
+        <div class="gem-header">
+            <span class="magic-icon">✨</span>
+            <h2>Identify Your Lucky Gemstone</h2>
+            <p>Enter your details and let our Astro-AI find the perfect stone for your success.</p>
+        </div>
+        
+        <!-- User Form -->
+        <form id="gemstoneForm" class="gem-form">
+            <div class="input-group">
+                <input type="text" id="userName" placeholder="Your Full Name" required>
+                <input type="tel" id="userWhatsApp" placeholder="WhatsApp Number" required>
+            </div>
+            <div class="input-group">
+                <input type="date" id="userDOB" required>
+                <select id="userZodiac" required>
+                    <option value="">Select Your Zodiac (Rashi)</option>
+                    <option value="Aries">Aries (Mesh)</option>
+                    <option value="Taurus">Taurus (Vrishabh)</option>
+                    <option value="Gemini">Gemini (Mithun)</option>
+                    <option value="Cancer">Cancer (Kark)</option>
+                    <option value="Leo">Leo (Singh)</option>
+                    <option value="Virgo">Virgo (Kanya)</option>
+                    <option value="Libra">Libra (Tula)</option>
+                    <option value="Scorpio">Scorpio (Vrishchik)</option>
+                    <option value="Sagittarius">Sagittarius (Dhanu)</option>
+                    <option value="Capricorn">Capricorn (Makar)</option>
+                    <option value="Aquarius">Aquarius (Kumbh)</option>
+                    <option value="Pisces">Pisces (Meen)</option>
+                </select>
+            </div>
+            <button type="submit" class="find-gem-btn">FIND MY LUCKY GEMSTONE 🔮</button>
+        </form>
+
+        <!-- Result Box (Hidden by Default) -->
+        <div id="gemResult" class="gem-result animate-pop" style="display: none;">
+            <div class="result-content">
+                <h3 id="resultTitle">Recommendation</h3>
+                <div class="gem-recommendation">
+                    <img id="gemImg" src="" alt="Gemstone">
+                    <div>
+                        <h4 id="gemName">Recommended: --</h4>
+                        <p id="gemDesc">Loading astrological advice...</p>
+                    </div>
+                </div>
+                <div class="result-actions">
+                    <a href="javascript:void(0)" id="whatsappLink" class="whatsapp-btn">Get Full Report on WhatsApp</a>
+                    <button type="button" onclick="resetForm()" class="reset-btn">Check Another</button>
+                </div>
+            </div>
+        </div>
+
+        <hr style="margin: 40px 0; border: 0; border-top: 1px dashed #ddd;">
+
+        <!-- Admin View (Demo for Client) -->
+        <div class="admin-demo-box">
+            <h4 style="color: var(--primary); margin-bottom: 15px;">Admin Preview: Captured Leads</h4>
+            <div class="table-responsive">
+                <table id="leadsTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>WhatsApp</th>
+                            <th>Zodiac</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leadsBody">
+                        <!-- Data will come here from JS -->
+                    </tbody>
+                </table>
+            </div>
+            <button onclick="downloadExcel()" class="excel-btn">📥 Download Leads as Excel (CSV)</button>
+        </div>
+    </div>
+</section>
+
+
+
+
 <!-- Promo Banners -->
 <div class="promo-container">
     <div class="promo-banner">
@@ -457,6 +546,35 @@
         color: var(--primary);
     }
 </style>
+
+
+
+<style>
+    /* --- Styles --- */
+    .gem-finder-section { padding: 60px 5%; background: #fdfaf5; display: flex; justify-content: center; }
+    .gem-finder-card { background: white; padding: 40px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); max-width: 900px; width: 100%; border: 1px solid #eee; }
+    .gem-header h2 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 30px; }
+    .input-group { display: flex; gap: 15px; margin-bottom: 15px; }
+    .input-group input, .input-group select { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 8px; outline: none; }
+    .find-gem-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+    
+    .gem-result { background: #fff9f0; padding: 25px; border-radius: 15px; border: 1px solid var(--accent); margin-top: 20px; }
+    .gem-recommendation { display: flex; align-items: center; gap: 20px; text-align: left; margin: 15px 0; }
+    .gem-recommendation img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--accent); }
+    
+    .whatsapp-btn { background: #25d366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; }
+    
+    /* Admin Table Styles */
+    .admin-demo-box { text-align: left; background: #f8f9fa; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
+    .table-responsive { overflow-x: auto; margin-bottom: 15px; }
+    table { width: 100%; border-collapse: collapse; background: white; font-size: 13px; }
+    table th, table td { border: 1px solid #eee; padding: 10px; text-align: left; }
+    table th { background: #f1f1f1; }
+    .excel-btn { background: #1d6f42; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+    @media (max-width: 600px) { .input-group { flex-direction: column; } }
+</style>
+
 <!-- Features Bar -->
 <div class="features-bar">
     <div class="feat-item">🚚 <h4>SPEEDY DELIVERY</h4><p>Fast & Secure Shipping</p></div>
@@ -507,6 +625,102 @@
 
     setInterval(nextSlide, 4000);
 </script>
+
+
+
+<script>
+    const gemData = {
+        "Aries": { name: "Red Coral (Moonga)", desc: "Brings energy and courage.", img: "https://via.placeholder.com/100/FF0000/FFFFFF?text=Moonga" },
+        "Taurus": { name: "Diamond (Heera)", desc: "Enhances beauty and luxury.", img: "https://via.placeholder.com/100/FFFFFF/000000?text=Heera" },
+        "Gemini": { name: "Emerald (Panna)", desc: "Boosts intelligence and business.", img: "https://via.placeholder.com/100/008000/FFFFFF?text=Panna" },
+        "Leo": { name: "Ruby (Manik)", desc: "Brings power and leadership.", img: "https://via.placeholder.com/100/8B0000/FFFFFF?text=Manik" },
+        // ... (Baaki rashiyaan bhi add kar sakte ho same format mein)
+    };
+
+    // 1. Form Submit hone pr data save krna
+    document.getElementById('gemstoneForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('userName').value;
+        const phone = document.getElementById('userWhatsApp').value;
+        const dob = document.getElementById('userDOB').value;
+        const zodiac = document.getElementById('userZodiac').value;
+
+        // Save to LocalStorage (Demo Database)
+        const newLead = { name, phone, dob, zodiac, date: new Date().toLocaleDateString() };
+        let leads = JSON.parse(localStorage.getItem('astroLeads')) || [];
+        leads.push(newLead);
+        localStorage.setItem('astroLeads', JSON.stringify(leads));
+
+        // Show Result
+        showResult(name, zodiac);
+        loadLeads(); // Refresh Admin Table
+    });
+
+    function showResult(name, zodiac) {
+        document.getElementById('gemstoneForm').style.display = 'none';
+        document.getElementById('gemResult').style.display = 'block';
+        
+        const res = gemData[zodiac] || { name: "Yellow Sapphire", desc: "For Wisdom and Fortune", img: "https://via.placeholder.com/100/FFFF00/000000?text=Pukhraj" };
+        
+        document.getElementById('resultTitle').innerText = "Report for " + name;
+        document.getElementById('gemName').innerText = "Gemstone: " + res.name;
+        document.getElementById('gemDesc').innerText = res.desc;
+        document.getElementById('gemImg').src = res.img;
+
+        // WhatsApp Link बनाना
+        const waMsg = `Hello! My name is ${name}. My Zodiac is ${zodiac}. I just got my lucky gemstone report: ${res.name}. Please guide me further.`;
+        document.getElementById('whatsappLink').href = `https://wa.me/918976337170?text=${encodeURIComponent(waMsg)}`;
+    }
+
+    // 2. Admin Table mein data load krna
+    function loadLeads() {
+        const leads = JSON.parse(localStorage.getItem('astroLeads')) || [];
+        const tbody = document.getElementById('leadsBody');
+        tbody.innerHTML = "";
+
+        leads.forEach(lead => {
+            const row = `<tr>
+                <td>${lead.name}</td>
+                <td>${lead.phone}</td>
+                <td>${lead.zodiac}</td>
+                <td>${lead.date}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+
+    // 3. Excel (CSV) Download function
+    function downloadExcel() {
+        const leads = JSON.parse(localStorage.getItem('astroLeads')) || [];
+        if(leads.length === 0) { alert("No leads to download!"); return; }
+
+        let csvContent = "data:text/csv;charset=utf-8,Name,Phone,Zodiac,Date\n";
+        leads.forEach(l => {
+            csvContent += `${l.name},${l.phone},${l.zodiac},${l.date}\n`;
+        });
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "Astro_Leads.csv");
+        document.body.appendChild(link);
+        link.click();
+    }
+
+    function resetForm() {
+        document.getElementById('gemstoneForm').reset();
+        document.getElementById('gemstoneForm').style.display = 'flex';
+        document.getElementById('gemResult').style.display = 'none';
+    }
+
+    // Initial Load
+    loadLeads();
+</script>
+
+
+
+
 
 </body>
 </html>
